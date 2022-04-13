@@ -194,6 +194,7 @@ $(".card .list-group").sortable({
 
     // array to store the task data in
     var tempArr = [];
+
     // loop over current set of children in sortable list
     ($(this).children().each(function(){
       var text = $(this)
@@ -211,7 +212,7 @@ $(".card .list-group").sortable({
         text: text,
         date: date
       });
-      console.log(text, date);
+      console.log(tempArr);
     }));
 
     // trim down list's ID to match object property
@@ -222,6 +223,20 @@ $(".card .list-group").sortable({
     // update array on tasks object and save
     tasks[arrName] = tempArr;
     saveTasks();
+  }
+});
+
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function(event, ui) {
+    ui.draggable.remove();
+  },
+  over:function(event, ui) {
+    console.log("over");
+  },
+  out: function(event, ui) {
+    console.log("out");
   }
 });
 
